@@ -10,7 +10,7 @@ const UpdateProduct = () => {
   const navigate = useNavigate();
   useEffect(() => {
     getUpdateProduct();
-  }, []);
+  });
 
   const getUpdateProduct = async () => {
     try {
