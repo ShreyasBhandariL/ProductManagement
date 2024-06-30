@@ -13,15 +13,18 @@ const Signup = () => {
   });
   const Content = async () => {
     console.warn(name, email, password);
-    let result = await fetch("http://localhost:8000/register", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        name,
-        email,
-        password,
-      }),
-    });
+    let result = await fetch(
+      "https://productmanagementserver-fzzc.onrender.com/register",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name,
+          email,
+          password,
+        }),
+      }
+    );
     result = await result.json();
     localStorage.setItem("user", JSON.stringify(result));
     console.warn(result);

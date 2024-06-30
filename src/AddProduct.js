@@ -15,11 +15,14 @@ const AddProduct = () => {
         }
         
         const userId = JSON.parse(localStorage.getItem("user"))._id;
-        let result = await fetch("http://localhost:8000/add-product", {
+        let result = await fetch(
+          "https://productmanagementserver-fzzc.onrender.com/add-product",
+          {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ name, price, category, userId, company })
-        });
+            body: JSON.stringify({ name, price, category, userId, company }),
+          }
+        );
         result =await  result.json();
         console.log(result);
     }

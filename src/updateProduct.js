@@ -15,7 +15,9 @@ const UpdateProduct = () => {
   const getUpdateProduct = async () => {
     try {
       console.log(params);
-      let result = await fetch(`http://localhost:8000/products/${params.id}`);
+      let result = await fetch(
+        `https://productmanagementserver-fzzc.onrender.com/products/${params.id}`
+      );
       result = await result.json();
       setName(result.name);
       setPrice(result.price);
@@ -28,12 +30,14 @@ const UpdateProduct = () => {
   };
 
   const updateProduct = async (id) => {
-    let result = await fetch(`http://localhost:8000/products/${id}`,
+    let result = await fetch(
+      `https://productmanagementserver-fzzc.onrender.com/products/${id}`,
       {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, price, category, company })
-      });
+        body: JSON.stringify({ name, price, category, company }),
+      }
+    );
     result = await result.json();
     if (result) {
       navigate("/products");

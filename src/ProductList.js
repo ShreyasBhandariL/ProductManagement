@@ -9,15 +9,19 @@ const ProductList = () => {
   }, []);
 
   const getProducts = async () => {
-    let result = await fetch("http://localhost:8000/products");
+    let result = await fetch(
+      "https://productmanagementserver-fzzc.onrender.com/products"
+    );
     result = await result.json();
     setProducts(result);
     };
     
     const deleteProduct = async(id) => {
-        let result = await fetch(`http://localhost:8000/products/${id}`, {
-         method: "Delete"   
-        }
+        let result = await fetch(
+          `https://productmanagementserver-fzzc.onrender.com/products/${id}`,
+          {
+            method: "Delete",
+          }
         );
         result = await result.json();
         if (result)
