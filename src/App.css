@@ -19,7 +19,6 @@
   display: flex;
   list-style: none;
   margin: 0;
-  background-color: aqua;
 }
 .Navbar li a{
   margin: 10px;
