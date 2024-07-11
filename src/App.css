@@ -69,11 +69,13 @@
 }
 
 .footer {
-  position: absolute;
+  position: fixed;
   bottom: 0;
-  background-color: #61dafb;
+  left: 0;
   width: 100%;
+  background-color: #61dafb;
   text-align: center;
+  padding: 10px 0;
 }
 
 
