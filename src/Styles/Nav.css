@@ -38,6 +38,7 @@
 @media (max-width: 768px) {
   .Navbar {
     justify-content: space-around;
+    margin: 0;
     width: 100%;
     position: fixed;
     bottom: 0;
