@@ -1,6 +1,6 @@
 /* eslint-disable no-template-curly-in-string */
 import React, { useEffect, useState } from "react";
-import "./Styles/ProductList.css";
+import "./Styles/BuyedProductList.css"; // new CSS file
 
 const BuyedProductList = () => {
   const [customers, setCustomers] = useState([]);
@@ -17,12 +17,11 @@ const BuyedProductList = () => {
     setCustomers(result);
   };
 
-    
   return (
-    <div className="productList">
+    <div className="buyedProductList">
       <h1>Buyers List</h1>
-      <div className="table-container">
-        <table className="product-table">
+      <div className="buyers-table-container">
+        <table className="buyers-table">
           <thead>
             <tr>
               <th>Sl.No</th>
@@ -49,6 +48,21 @@ const BuyedProductList = () => {
               ))}
           </tbody>
         </table>
+      </div>
+
+      {/* Card view for mobile */}
+      <div className="buyers-card-container">
+        {customers.length > 0 &&
+          customers?.map((item, index) => (
+            <div key={item._id} className="buyer-card">
+              <h2>Customer Name: {item.buyerName}</h2>
+              <p>Customer Contact: {item.buyerContact}</p>
+              <p>Product Name: {item.productName}</p>
+              <p>Product Price: {item.productPrice}</p>
+              <p>Product Category: {item.productCategory}</p>
+              <p>Quantity: {item.quantity}</p>
+            </div>
+          ))}
       </div>
     </div>
   );

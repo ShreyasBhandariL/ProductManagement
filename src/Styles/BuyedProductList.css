@@ -1,0 +1,88 @@
+.buyedProductList {
+  margin: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.buyedProductList h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #ffffff;
+}
+
+.buyers-table{
+    background-color: white;
+}
+
+.buyers-table-container {
+  overflow-x: auto;
+}
+
+.buyers-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.buyers-table th,
+.buyers-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.buyers-table th {
+  background-color: #f2f2f2;
+  color: #333;
+}
+
+.buyers-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+/* .buyers-table tr:hover {
+  background-color: #f1f1f1;
+} */
+
+.buyers-card-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.buyer-card {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: calc(100% - 40px);
+  max-width: 300px;
+  margin: 10px;
+}
+
+.buyer-card h2 {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.buyer-card p {
+  font-size: 1em;
+  margin-bottom: 5px;
+  color: #666;
+}
+
+/* Hide the table on small screens */
+@media (max-width: 768px) {
+  .buyers-table-container {
+    display: none;
+  }
+}
+
+/* Hide the cards on large screens */
+@media (min-width: 769px) {
+  .buyers-card-container {
+    display: none;
+  }
+}

@@ -105,82 +105,119 @@ const ProductList = () => {
             </tr>
           </thead>
           <tbody>
-            {products.length > 0 && products?.map((item, index) => (
-              <tr key={item._id}>
-                <td>{index + 1}</td>
-                <td>{item.name}</td>
-                <td>
-                  {item.image && (
-                    <img
-                      src={`https://productmanagementserver-fzzc.onrender.com/${item.image}`}
-                      alt={item.name}
-                      className="product-image"
-                    />
-                  )}
-                </td>
-                <td>{item.price}</td>
-                <td>{item.category}</td>
-                <td>
-                  <button onClick={() => deleteProduct(item._id)}>
-                    Delete
-                  </button>
-                  <button>
-                    <Link to={`/update/${item._id}`}>Update</Link>
-                  </button>
-                  <button onClick={() => openPopup(item)}>Buy</button>
-                </td>
-              </tr>
-            ))}
+            {products.length > 0 &&
+              products?.map((item, index) => (
+                <tr key={item._id}>
+                  <td>{index + 1}</td>
+                  <td>{item.name}</td>
+                  <td>
+                    {item.image && (
+                      <img
+                        src={`https://productmanagementserver-fzzc.onrender.com/${item.image}`}
+                        alt={item.name}
+                        className="product-image"
+                      />
+                    )}
+                  </td>
+                  <td>{item.price}</td>
+                  <td>{item.category}</td>
+                  <td className="product-buttons">
+                    <button onClick={() => openPopup(item)}>Buy</button>
+                    <button>
+                      <Link to={`/update/${item._id}`} className="update-link">
+                        Update
+                      </Link>
+                    </button>
+
+                    <button onClick={() => deleteProduct(item._id)}>
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              ))}
           </tbody>
         </table>
       </div>
-      {showPopup && selectedProduct && (
-        <div className="popup">
-          <div className="popup-content">
-            <button className="close-btn" onClick={closePopup}>
-              &times;
-            </button>
-            <h2>{selectedProduct.name}</h2>
-            {selectedProduct.image && (
-              <a href={`https://productmanagementserver-fzzc.onrender.com/${selectedProduct.image}`}>
+
+      {/* Card view for mobile */}
+      <div className="card-container">
+        {products.length > 0 &&
+          products?.map((item, index) => (
+            <div key={item._id} className="product-card">
+              {item.image && (
                 <img
-                  src={`https://productmanagementserver-fzzc.onrender.com/${selectedProduct.image}`}
-                  alt={selectedProduct.name}
+                  src={`https://productmanagementserver-fzzc.onrender.com/${item.image}`}
+                  alt={item.name}
                   className="product-image"
                 />
-              </a>
-            )}
-            <p>Price: ${selectedProduct.price}</p>
-            <div className="form-group">
-              <label htmlFor="buyerName">Buyer Name:</label>
-              <input
-                type="text"
-                id="buyerName"
-                value={buyerName}
-                onChange={(e) => setBuyerName(e.target.value)}
-              />
+              )}
+              <h2>{item.name}</h2>
+              <p>Price: ${item.price}</p>
+              <p>Category: {item.category}</p>
+              <div className="product-buttons">
+                <button onClick={() => openPopup(item)}>Buy</button>
+                <button>
+                  <Link to={`/update/${item._id}`} className="update-link">
+                    Update
+                  </Link>
+                </button>
+                <button onClick={() => deleteProduct(item._id)}>Delete</button>
+              </div>
             </div>
-            <div className="form-group">
-              <label htmlFor="buyerContact">Contact:</label>
-              <input
-                type="text"
-                id="buyerContact"
-                value={buyerContact}
-                onChange={(e) => setBuyerContact(e.target.value)}
-              />
+          ))}
+      </div>
+
+      {showPopup && selectedProduct && (
+        <div className="container">
+          <div className="popup">
+            <div className="popup-content">
+              <button className="close-btn" onClick={closePopup}>
+                &times;
+              </button>
+              <h2>{selectedProduct.name}</h2>
+              {selectedProduct.image && (
+                <a
+                  href={`https://productmanagementserver-fzzc.onrender.com/${selectedProduct.image}`}
+                >
+                  <img
+                    src={`https://productmanagementserver-fzzc.onrender.com/${selectedProduct.image}`}
+                    alt={selectedProduct.name}
+                    className="product-image"
+                  />
+                </a>
+              )}
+              <p>Price: ${selectedProduct.price}</p>
+              <div className="form-group">
+                <label htmlFor="buyerName">Buyer Name:</label>
+                <input
+                  type="text"
+                  id="buyerName"
+                  value={buyerName}
+                  onChange={(e) => setBuyerName(e.target.value)}
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="buyerContact">Contact:</label>
+                <input
+                  type="text"
+                  id="buyerContact"
+                  value={buyerContact}
+                  onChange={(e) => setBuyerContact(e.target.value)}
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="quantity">Quantity:</label>
+                <input
+                  type="number"
+                  id="quantity"
+                  value={quantity}
+                  onChange={(e) => setQuantity(parseInt(e.target.value))}
+                />
+              </div>
+              <button className="buy-btn" onClick={handleBuy}>
+                Buy Now
+              </button>
             </div>
-            <div className="form-group">
-              <label htmlFor="quantity">Quantity:</label>
-              <input
-                type="number"
-                id="quantity"
-                value={quantity}
-                onChange={(e) => setQuantity(parseInt(e.target.value))}
-              />
-            </div>
-            <button className="buy-btn" onClick={handleBuy}>
-              Buy Now
-            </button>
           </div>
         </div>
       )}

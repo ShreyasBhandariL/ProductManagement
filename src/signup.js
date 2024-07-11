@@ -33,8 +33,9 @@ const Signup = () => {
     navigate("/Home");
   };
   return (
+    <div className="container">
     <div className="signup">
-      <h1>Register</h1>
+      <h1 style={{color:"black"}}>Register</h1>
       <input
         type="text"
         placeholder="Enter Your Name"
@@ -56,7 +57,8 @@ const Signup = () => {
       <button  onClick={Content} type="button">
         Sign UP
       </button>
-    </div>
+      </div>
+      </div>
   );
 };
 

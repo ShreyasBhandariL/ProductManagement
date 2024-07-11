@@ -9,7 +9,7 @@ const Login = () => {
   useEffect(() => {
     const auth = localStorage.getItem("user");
     if (auth) {
-      navigate("/Home");
+      navigate("/");
     }
   });
   const loggedIn = async () => {
@@ -30,23 +30,25 @@ const Login = () => {
     }
   };
   return (
-    <div className="signup">
-      <h1>Login</h1>
-      <input
-        type="email"
-        placeholder="Enter email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <input
-        type="password"
-        placeholder="Enter Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <button onClick={loggedIn} type="button">
-        Login
-      </button>
+    <div className="container">
+      <div className="signup">
+        <h1 style={{ color: "black" }}>Login</h1>
+        <input
+          type="email"
+          placeholder="Enter email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <input
+          type="password"
+          placeholder="Enter Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <button onClick={loggedIn} type="button">
+          Login
+        </button>
+      </div>
     </div>
   );
 };

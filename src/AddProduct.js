@@ -29,7 +29,7 @@ const AddProduct = () => {
     formData.append("image", image);
 
     try {
-      let result = await fetch(
+      let response = await fetch(
         "https://productmanagementserver-fzzc.onrender.com/add-product",
         {
           method: "POST",
@@ -37,14 +37,12 @@ const AddProduct = () => {
         }
       );
 
-      if (!result.ok) {
+      if (!response.ok) {
         throw new Error("Failed to add product");
       }
 
-      result = await result.json();
-      if (result.status === 200) {
-        navigate("/products");
-      }
+      await response.json();
+      navigate("/products");
     } catch (error) {
       console.error("Error:", error.message);
     }

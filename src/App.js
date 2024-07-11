@@ -9,6 +9,7 @@ import AddProduct from "./AddProduct";
 import ProductList from "./ProductList";
 import UpdateProduct from "./updateProduct";
 import BuyedProductList from "./BuyedProductList";
+import MainPage from "./mainPage";
 function App() {
   return (
     <div className="1">
@@ -16,6 +17,7 @@ function App() {
         <BrowserRouter>
           <Nav />
           <Routes>
+            <Route path="/" element={<MainPage />}></Route>
             <Route element={<PrivateComponent />}>
               <Route path="/products" element={<ProductList />}></Route>
               <Route path="/AddProduct" element={<AddProduct />}></Route>
