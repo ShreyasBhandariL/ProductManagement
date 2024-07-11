@@ -13,6 +13,7 @@ const AddProduct = () => {
     setImage(e.target.files[0]);
   };
 
+
   const Product = async () => {
     if (!name || !price || !category || !company) {
       setError(true);
@@ -28,16 +29,24 @@ const AddProduct = () => {
     formData.append("company", company);
     formData.append("image", image);
 
-    let result = await fetch(
-      "https://productmanagementserver-fzzc.onrender.com/add-product",
-      {
-        method: "POST",
-        body: formData,
-      }
-    );
+    try {
+      let result = await fetch(
+        "https://productmanagementserver-fzzc.onrender.com/add-product",
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
 
-    result = await result.json();
-    console.log(result);
+      if (!result.ok) {
+        throw new Error("Failed to add product");
+      }
+
+      result = await result.json();
+      console.log(result);
+    } catch (error) {
+      console.error("Error:", error.message);
+    }
   };
 
   return (
