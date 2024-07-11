@@ -53,20 +53,6 @@
 }
 
 
-.signup{
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  align-items: center;
-}
-
-.signup input{
-  margin: 0.5%;
-}
-
-.signup button{
-  margin-right: 5%;
-}
 
 .footer {
   position: fixed;
@@ -75,7 +61,8 @@
   width: 100%;
   background-color: #61dafb;
   text-align: center;
-  padding: 10px 0;
+  padding: 5px 0;
+  font-size: small;
 }
 
 

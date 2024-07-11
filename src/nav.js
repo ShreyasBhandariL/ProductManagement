@@ -1,15 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Styles/Nav.css";
 
 const Nav = () => {
-  const [isActive, setIsActive] = useState(false);
   const auth = localStorage.getItem("user");
   const navigate = useNavigate();
-
-  const toggleMenu = () => {
-    setIsActive(!isActive);
-  };
 
   const logout = () => {
     localStorage.clear();
@@ -17,48 +12,67 @@ const Nav = () => {
   };
 
   return (
-    <nav className="nav">
-      <div className="navbar-container">
-        <div className="menu-icon" onClick={toggleMenu}>
-          <i className="fas fa-bars"></i>
-        </div>
-        <ul className={`Navbar ${isActive ? "active" : ""}`}>
+
+        <ul className="Navbar">
           {auth ? (
             <>
               <li>
-                <Link to="/products">Products</Link>
+                <Link to="/products">
+                  <i className="fas fa-box mobile-icon"></i>
+                  <span className="nav-text">Products</span>
+                </Link>
               </li>
               <li>
-                <Link to="/AddProduct">AddProduct</Link>
+                <Link to="/AddProduct">
+                  <i className="fas fa-plus-circle mobile-icon"></i>
+                  <span className="nav-text">Add Product</span>
+                </Link>
               </li>
               <li>
-                <Link to="/CustomerList">Buyed Product List</Link>
+                <Link to="/CustomerList">
+                  <i className="fas fa-list mobile-icon"></i>
+                  <span className="nav-text">Buyed Product List</span>
+                </Link>
               </li>
               <li>
-                <Link to="/ContactUs">Contact US</Link>
+                <Link to="/ContactUs">
+                  <i className="fas fa-envelope mobile-icon"></i>
+                  <span className="nav-text">Contact Us</span>
+                </Link>
               </li>
               <li>
-                <Link to="/Stories">Stories</Link>
+                <Link to="/Stories">
+                  <i className="fas fa-book mobile-icon"></i>
+                  <span className="nav-text">Stories</span>
+                </Link>
               </li>
               <li>
                 <Link onClick={logout} to="/signup">
-                  Logout ({JSON.parse(auth).name})
+                  <i className="fas fa-sign-out-alt mobile-icon"></i>
+                  <span className="nav-text">
+                    Logout ({JSON.parse(auth).name})
+                  </span>
                 </Link>
               </li>
             </>
           ) : (
             <>
               <li>
-                <Link to="/signup">Signup</Link>
+                <Link to="/signup">
+                  <i className="fas fa-user-plus mobile-icon"></i>
+                  <span className="nav-text">Signup</span>
+                </Link>
               </li>
               <li>
-                <Link to="/login">Login</Link>
+                <Link to="/login">
+                  <i className="fas fa-sign-in-alt mobile-icon"></i>
+                  <span className="nav-text">Login</span>
+                </Link>
               </li>
             </>
           )}
         </ul>
-      </div>
-    </nav>
+
   );
 };
 

@@ -52,6 +52,7 @@ const AddProduct = () => {
   };
 
   return (
+    <div className="container">
     <div className="signup">
       <h2>Add New Product</h2>
       <input
@@ -108,7 +109,8 @@ const AddProduct = () => {
       <button onClick={Product} type="button">
         Add Product
       </button>
-    </div>
+      </div>
+      </div>
   );
 };
 

@@ -13,6 +13,7 @@
 .Navbar {
   display: flex;
   list-style: none;
+    background: #333;
   padding: 0;
   margin: 0;
 }
@@ -24,37 +25,48 @@
 .Navbar li a {
   color: #fff;
   text-decoration: none;
+  display: flex;
+  align-items: center;
 }
 
-.menu-icon {
+.Navbar li a .nav-text {
+  margin-left: 8px;
+}
+
+.Navbar li a .mobile-icon {
   display: none;
 }
 
 @media (max-width: 768px) {
   .Navbar {
-    display: none;
-    flex-direction: column;
+    justify-content: space-around;
     width: 100%;
-    position: absolute;
-    top: 60px;
-    left: 0;
+    position: fixed;
+    bottom: 0;
     background: #333;
+    padding: 10px 0;
+    border: 2px solid red;
   }
+/* 
+  .nav{
+    display: none;
+  } */
 
   .Navbar li {
-    margin: 10px 0;
+    margin: 0;
   }
 
-  .navbar-container {
-    flex-direction: column;
+  .Navbar li a .nav-text {
+    display: none;
   }
 
-  .menu-icon {
+  .Navbar li a .mobile-icon {
     display: block;
-    cursor: pointer;
+    font-size: 20px;
   }
 
-  .Navbar.active {
-    display: flex;
+  /* Hide footer in mobile view */
+  .footer {
+    display: none;
   }
 }

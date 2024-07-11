@@ -52,6 +52,7 @@ const ProductList = () => {
 
   const handleBuy = async () => {
     if (selectedProduct && quantity > 0 && buyerName && buyerContact) {
+      console.log(selectedProduct.category);
       const buyerInfo = {
         productId: selectedProduct._id,
         productName: selectedProduct.name,
