@@ -14,9 +14,8 @@ const AddProduct = () => {
     setImage(e.target.files[0]);
   };
 
-
   const Product = async () => {
-    if (!name || !price || !category ) {
+    if (!name || !price || !category) {
       setError(true);
       return false;
     }
@@ -53,64 +52,56 @@ const AddProduct = () => {
 
   return (
     <div className="container">
-    <div className="signup">
-      <h2>Add New Product</h2>
-      <input
-        type="text"
-        placeholder="Enter the Product Name"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-      />
-      {error && !name && <span className="validation">Enter a valid Name</span>}
+      <div className="signup">
+        <h2>Add New Product</h2>
+        <input
+          type="text"
+          placeholder="Enter the Product Name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+        {error && !name && <span className="validation">Enter a valid Name</span>}
 
-      <input
-        type="text"
-        placeholder="Enter the Product Price"
-        value={price}
-        onChange={(e) => setPrice(e.target.value)}
-      />
-      {error && !price && (
-        <span className="validation">Enter a valid Price</span>
-      )}
+        <input
+          type="text"
+          placeholder="Enter the Product Price"
+          value={price}
+          onChange={(e) => setPrice(e.target.value)}
+        />
+        {error && !price && (
+          <span className="validation">Enter a valid Price</span>
+        )}
 
-      <select
-        value={category}
-        onChange={(e) => setCategory(e.target.value)}
-        style={{
-          display: "block",
-          width: "100%",
-          padding: "10px",
-          margin: "10px 0",
-          border: "1px solid #ccc",
-          borderRadius: "5px",
-        }}
-      >
-        <option value="" disabled>Select any option</option>
-        <option value="Textile">Textile Crafts</option>
-        <option value="Paper">Paper Crafts</option>
-        <option value="Wood">Wood Crafts</option>
-        <option value="Ceramics">Ceramics and Pottery</option>
-        <option value="Jewelry">Jewelry Making</option>
-        <option value="Glass">Glass Crafts</option>
-        <option value="Leather">Leather Crafts</option>
-        <option value="Metal">Metal Crafts</option>
-        <option value="Fiber">Fiber Arts</option>
-        <option value="Others">Other Crafts</option>
-      </select>
-      {error && !category && (
-        <span className="validation">Enter a valid Category</span>
-      )}
+        <select
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
+        >
+          <option value="" disabled>Select any option</option>
+          <option value="Textile">Textile Crafts</option>
+          <option value="Paper">Paper Crafts</option>
+          <option value="Wood">Wood Crafts</option>
+          <option value="Ceramics">Ceramics and Pottery</option>
+          <option value="Jewelry">Jewelry Making</option>
+          <option value="Glass">Glass Crafts</option>
+          <option value="Leather">Leather Crafts</option>
+          <option value="Metal">Metal Crafts</option>
+          <option value="Fiber">Fiber Arts</option>
+          <option value="Others">Other Crafts</option>
+        </select>
+        {error && !category && (
+          <span className="validation">Enter a valid Category</span>
+        )}
 
-      <input type="file" onChange={handleImageChange} />
-      {error && !image && (
-        <span className="validation">Upload a valid Image</span>
-      )}
+        <input type="file" onChange={handleImageChange} />
+        {error && !image && (
+          <span className="validation">Upload a valid Image</span>
+        )}
 
-      <button onClick={Product} type="button">
-        Add Product
-      </button>
+        <button onClick={Product} type="button">
+          Add Product
+        </button>
       </div>
-      </div>
+    </div>
   );
 };
 

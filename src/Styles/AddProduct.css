@@ -5,9 +5,10 @@ body {
   padding: 0;
 }
 
+
 .signup {
   width: 100%;
-  max-width: 500px;
+  max-width: 400px;
   margin: 50px auto;
   padding: 20px;
   background: #ffffff;
@@ -37,7 +38,13 @@ body {
 .signup .validation {
   color: red;
   font-size: 12px;
-  margin: -10px 0 10px;
+}
+
+.signup select{
+          padding: 10px;
+          margin: 10px 0;
+          border: 1px solid #ccc;
+          border-radius: 5px;
 }
 
 .signup button {
@@ -54,10 +61,4 @@ body {
 
 .signup button:hover {
   background-color: #218838;
-}
-
-@media (max-width: 600px) {
-  .signup {
-    padding: 15px;
-  }
-}
+} 

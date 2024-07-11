@@ -66,20 +66,6 @@
 }
 
 
-.login{
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  align-items: center;
-}
-
-.login h1 {
-  text-align: left;
-  align-items: left;
-}
-.login input{
-  margin: 0.5%;
-}
 
 .validation{
   margin-right: 20px;

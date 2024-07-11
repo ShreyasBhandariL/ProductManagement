@@ -18,9 +18,7 @@
   margin: 0;
 }
 
-.Navbar li {
-  margin: 0 10px;
-}
+
 
 .Navbar li a {
   color: #fff;
@@ -45,7 +43,6 @@
     bottom: 0;
     background: #333;
     padding: 10px 0;
-    border: 2px solid red;
   }
 /* 
   .nav{
