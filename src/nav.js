@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import "./Nav.css";
+import "./Styles/Nav.css";
 
 const Nav = () => {
   const [isActive, setIsActive] = useState(false);
@@ -30,9 +30,6 @@ const Nav = () => {
               </li>
               <li>
                 <Link to="/AddProduct">AddProduct</Link>
-              </li>
-              <li>
-                <Link to="/update">UpdateProduct</Link>
               </li>
               <li>
                 <Link to="/ContactUs">Contact US</Link>

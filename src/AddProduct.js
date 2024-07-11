@@ -1,82 +1,96 @@
-import React from "react";
+import React, { useState } from "react";
+import "./Styles/AddProduct.css";
 
 const AddProduct = () => {
-    const [name, setName] = React.useState("");
-    const [price, setPrice] = React.useState("");
-    const [category, setCategory] = React.useState("");
-    const [company, setCompany] = React.useState("");
-    const [error, setError] = React.useState(false);
-    
-    const Product = async () => {
-        if (!name || !price || !category || !company)
-        {
-            setError(true);
-            return false;
-        }
-        
-        const userId = JSON.parse(localStorage.getItem("user"))._id;
-        let result = await fetch(
-          "https://productmanagementserver-fzzc.onrender.com/add-product",
-          {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ name, price, category, userId, company }),
-          }
-        );
-        result =await  result.json();
-        console.log(result);
+  const [name, setName] = useState("");
+  const [price, setPrice] = useState("");
+  const [category, setCategory] = useState("");
+  const [company, setCompany] = useState("");
+  const [error, setError] = useState(false);
+  const [image, setImage] = useState(null);
+
+  const handleImageChange = (e) => {
+    setImage(e.target.files[0]);
+  };
+
+  const Product = async () => {
+    if (!name || !price || !category || !company) {
+      setError(true);
+      return false;
     }
-    return (
-      <div className="signup">
-        <input
-          type="text"
-          placeholder="Enter the Product Name"
-          value={name}
-          onChange={(e) => {
-            setName(e.target.value);
-          }}
-        />
-        {error && !name && (
-          <span className="validation">Enter the valid Name</span>
-        )}
-        <input
-          type="text"
-          placeholder="Enter the Product Price"
-          value={price}
-          onChange={(e) => {
-            setPrice(e.target.value);
-          }}
-        />
-        {error && !price && (
-          <span className="validation">Enter the valid Price</span>
-        )}
-        <input
-          type="text"
-          placeholder="Enter the Product Category"
-          value={category}
-          onChange={(e) => {
-            setCategory(e.target.value);
-          }}
-        />
-        {error && !category && (
-          <span className="validation">Enter the valid Category</span>
-        )}
-        <input
-          type="text"
-          placeholder="Enter the product Company"
-          value={company}
-          onChange={(e) => {
-            setCompany(e.target.value);
-          }}
-        />
-        {error && !company && (
-          <span className="validation">Enter the valid Company</span>
-        )}
-        <button onClick={Product} type="button">
-          AddProduct
-        </button>
-      </div>
+
+    const userId = JSON.parse(localStorage.getItem("user"))._id;
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("price", price);
+    formData.append("category", category);
+    formData.append("userId", userId);
+    formData.append("company", company);
+    formData.append("image", image);
+
+    let result = await fetch(
+      "https://productmanagementserver-fzzc.onrender.com/add-product",
+      {
+        method: "POST",
+        body: formData,
+      }
     );
-}
+
+    result = await result.json();
+    console.log(result);
+  };
+
+  return (
+    <div className="signup">
+      <h2>Add New Product</h2>
+      <input
+        type="text"
+        placeholder="Enter the Product Name"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+      />
+      {error && !name && <span className="validation">Enter a valid Name</span>}
+
+      <input
+        type="text"
+        placeholder="Enter the Product Price"
+        value={price}
+        onChange={(e) => setPrice(e.target.value)}
+      />
+      {error && !price && (
+        <span className="validation">Enter a valid Price</span>
+      )}
+
+      <input
+        type="text"
+        placeholder="Enter the Product Category"
+        value={category}
+        onChange={(e) => setCategory(e.target.value)}
+      />
+      {error && !category && (
+        <span className="validation">Enter a valid Category</span>
+      )}
+
+      <input
+        type="text"
+        placeholder="Enter the Product Company"
+        value={company}
+        onChange={(e) => setCompany(e.target.value)}
+      />
+      {error && !company && (
+        <span className="validation">Enter a valid Company</span>
+      )}
+
+      <input type="file" onChange={handleImageChange} />
+      {error && !image && (
+        <span className="validation">Upload a valid Image</span>
+      )}
+
+      <button onClick={Product} type="button">
+        Add Product
+      </button>
+    </div>
+  );
+};
 
 export default AddProduct;
