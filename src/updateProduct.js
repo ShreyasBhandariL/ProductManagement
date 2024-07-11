@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -10,11 +11,10 @@ const UpdateProduct = () => {
   const navigate = useNavigate();
   useEffect(() => {
     getUpdateProduct();
-  });
+  }, [params.id]);
 
   const getUpdateProduct = async () => {
     try {
-      console.log(params);
       let result = await fetch(
         `https://productmanagementserver-fzzc.onrender.com/products/${params.id}`
       );
@@ -23,8 +23,7 @@ const UpdateProduct = () => {
       setPrice(result.price);
       setCategory(result.category);
       setCompany(result.company);
-    }
-    catch {
+    } catch {
       console.log("Error:");
     }
   };
@@ -42,7 +41,7 @@ const UpdateProduct = () => {
     if (result) {
       navigate("/products");
     }
-}
+  };
 
   return (
     <div className="signup">
@@ -78,7 +77,7 @@ const UpdateProduct = () => {
           setCompany(e.target.value);
         }}
       />
-      <button  type="button" onClick={() => updateProduct(params.id)}>
+      <button type="button" onClick={() => updateProduct(params.id)}>
         UpdateProduct
       </button>
     </div>
