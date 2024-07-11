@@ -20,7 +20,7 @@ const Nav = () => {
     <nav className="nav">
       <div className="navbar-container">
         <div className="menu-icon" onClick={toggleMenu}>
-          <i className="fas fa-bars" ></i>
+          <i className="fas fa-bars"></i>
         </div>
         <ul className={`Navbar ${isActive ? "active" : ""}`}>
           {auth ? (
@@ -30,6 +30,9 @@ const Nav = () => {
               </li>
               <li>
                 <Link to="/AddProduct">AddProduct</Link>
+              </li>
+              <li>
+                <Link to="/CustomerList">Buyed Product List</Link>
               </li>
               <li>
                 <Link to="/ContactUs">Contact US</Link>

@@ -56,6 +56,7 @@ const ProductList = () => {
         productId: selectedProduct._id,
         productName: selectedProduct.name,
         productPrice: selectedProduct.price,
+        productCategory: selectedProduct.category,
         quantity: quantity,
         buyerName: buyerName,
         buyerContact: buyerContact,
@@ -103,7 +104,7 @@ const ProductList = () => {
             </tr>
           </thead>
           <tbody>
-            {products.map((item, index) => (
+            {products.length > 0 && products?.map((item, index) => (
               <tr key={item._id}>
                 <td>{index + 1}</td>
                 <td>{item.name}</td>
