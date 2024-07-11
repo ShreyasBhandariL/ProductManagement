@@ -1,3 +1,4 @@
+/* eslint-disable no-template-curly-in-string */
 import React, { useEffect, useState } from "react";
 import { Link,useNavigate } from "react-router-dom";
 import "./Styles/ProductList.css"; 
@@ -62,7 +63,7 @@ const ProductList = () => {
 
       try {
         const response = await fetch(
-          "https://your-buyers-database-url.com/add-buyer",
+          "https://productmanagementserver-fzzc.onrender.com/add-buyer",
           {
             method: "POST",
             headers: {
@@ -134,30 +135,50 @@ const ProductList = () => {
       {showPopup && selectedProduct && (
         <div className="popup">
           <div className="popup-content">
-            <span className="close" onClick={closePopup}>
+            <button className="close-btn" onClick={closePopup}>
               &times;
-            </span>
+            </button>
             <h2>{selectedProduct.name}</h2>
+            {selectedProduct.image && (
+              <a href={`https://productmanagementserver-fzzc.onrender.com/${selectedProduct.image}`}>
+                <img
+                  src={`https://productmanagementserver-fzzc.onrender.com/${selectedProduct.image}`}
+                  alt={selectedProduct.name}
+                  className="product-image"
+                />
+              </a>
+            )}
             <p>Price: ${selectedProduct.price}</p>
-            <label>Quantity:</label>
-            <input
-              type="number"
-              value={quantity}
-              onChange={(e) => setQuantity(parseInt(e.target.value))}
-            />
-            <label>Buyer Name:</label>
-            <input
-              type="text"
-              value={buyerName}
-              onChange={(e) => setBuyerName(e.target.value)}
-            />
-            <label>Contact:</label>
-            <input
-              type="text"
-              value={buyerContact}
-              onChange={(e) => setBuyerContact(e.target.value)}
-            />
-            <button onClick={handleBuy}>Buy Now</button>
+            <div className="form-group">
+              <label htmlFor="buyerName">Buyer Name:</label>
+              <input
+                type="text"
+                id="buyerName"
+                value={buyerName}
+                onChange={(e) => setBuyerName(e.target.value)}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="buyerContact">Contact:</label>
+              <input
+                type="text"
+                id="buyerContact"
+                value={buyerContact}
+                onChange={(e) => setBuyerContact(e.target.value)}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="quantity">Quantity:</label>
+              <input
+                type="number"
+                id="quantity"
+                value={quantity}
+                onChange={(e) => setQuantity(parseInt(e.target.value))}
+              />
+            </div>
+            <button className="buy-btn" onClick={handleBuy}>
+              Buy Now
+            </button>
           </div>
         </div>
       )}

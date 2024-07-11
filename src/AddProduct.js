@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./Styles/AddProduct.css";
+import { useNavigate } from "react-router-dom";
 
 const AddProduct = () => {
   const [name, setName] = useState("");
@@ -8,6 +9,7 @@ const AddProduct = () => {
   const [company, setCompany] = useState("");
   const [error, setError] = useState(false);
   const [image, setImage] = useState(null);
+  const navigate = useNavigate();
 
   const handleImageChange = (e) => {
     setImage(e.target.files[0]);
@@ -43,7 +45,9 @@ const AddProduct = () => {
       }
 
       result = await result.json();
-      console.log(result);
+      if (result.status === 200) {
+        navigate("/products");
+      }
     } catch (error) {
       console.error("Error:", error.message);
     }

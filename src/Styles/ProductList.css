@@ -29,8 +29,8 @@
 }
 
 .product-image {
-  width: 50px;
-  height: 50px;
+  width: 80px;
+  height: 80px;
   object-fit: cover;
   border-radius: 5px;
 }
@@ -74,3 +74,86 @@
     margin: 0 auto;
   }
 }
+
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; 
+  filter: blur(10);
+}
+
+.popup-content {
+  background-color: #fff;
+  padding: 10px 50px 10px 30px;
+  width: 30%;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 24px;
+  color: #777;
+}
+
+.popup-content h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.popup-content p {
+  margin-bottom: 15px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.buy-btn {
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.buy-btn:hover {
+  background-color: #45a049;
+}
+
+.popup-image {
+  width: 100px; 
+  height: 100px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
