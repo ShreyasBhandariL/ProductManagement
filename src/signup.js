@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+
+
 const Signup = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");

@@ -1,15 +1,17 @@
 import React, { useState , useEffect} from "react";
 import { useNavigate } from "react-router-dom";
+
+
 const Login = () => {
   const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const navigate = useNavigate();
-    useEffect(() => {
-        const auth = localStorage.getItem("user");
-        if (auth) {
-            navigate("/Home")
-        }
-    });
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+  useEffect(() => {
+    const auth = localStorage.getItem("user");
+    if (auth) {
+      navigate("/Home");
+    }
+  });
   const loggedIn = async () => {
     let result = await fetch(
       "https://productmanagementserver-fzzc.onrender.com/login",
@@ -21,15 +23,14 @@ const Login = () => {
     );
     result = await result.json();
     if (result.name) {
-        localStorage.setItem("user", JSON.stringify(result));
-        navigate("/Home");
-      }
-    else {
-        alert("Enter the Correct Password and Email");
-      }
+      localStorage.setItem("user", JSON.stringify(result));
+      navigate("/Home");
+    } else {
+      alert("Enter the Correct Password and Email");
+    }
   };
   return (
-    <div className="login">
+    <div className="signup">
       <h1>Login</h1>
       <input
         type="email"
