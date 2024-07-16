@@ -17,24 +17,28 @@ const Signup = () => {
   });
   const Content = async () => {
     try {
-      setLoader(true);
-      let result = await fetch(
-        "https://productmanagementserver-fzzc.onrender.com/register",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            name,
-            email,
-            password,
-            role,
-          }),
-        }
-      );
-      result = await result.json();
-      localStorage.setItem("user", JSON.stringify(result));
-      console.warn(result);
-      navigate("/");
+      if (!name && !email && !password && !role) {
+        alert("Please fill all the fields");
+      } else {
+        setLoader(true);
+        let result = await fetch(
+          "https://productmanagementserver-fzzc.onrender.com/register",
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              name,
+              email,
+              password,
+              role,
+            }),
+          }
+        );
+        result = await result.json();
+        localStorage.setItem("user", JSON.stringify(result));
+        console.warn(result);
+        navigate("/");
+      }
     } finally {
       setLoader(false);
     }

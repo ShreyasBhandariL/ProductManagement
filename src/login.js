@@ -16,21 +16,27 @@ const Login = () => {
   });
   const loggedIn = async () => {
     try {
-      setLoader(true);
-      let result = await fetch(
-        "https://productmanagementserver-fzzc.onrender.com/login",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email, password, role }),
+      if (!email && !password && !role)
+      {
+        alert("Please fill all the fields");
+      }else
+      {
+        setLoader(true);
+        let result = await fetch(
+          "https://productmanagementserver-fzzc.onrender.com/login",
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email, password, role }),
+          }
+        );
+        result = await result.json();
+        if (result.name) {
+          localStorage.setItem("user", JSON.stringify(result));
+          navigate("/");
+        } else {
+          alert("Enter the Correct Password and Email");
         }
-      );
-      result = await result.json();
-      if (result.name) {
-        localStorage.setItem("user", JSON.stringify(result));
-        navigate("/");
-      } else {
-        alert("Enter the Correct Password and Email");
       }
     } finally {
       setLoader(false);
