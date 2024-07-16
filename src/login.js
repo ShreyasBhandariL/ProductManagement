@@ -18,9 +18,8 @@ const Login = () => {
     try {
       if (!email && !password && !role)
       {
-        alert("Please fill all the fields");
-      }else
-      {
+        return alert("Please fill all the fields");
+      }
         setLoader(true);
         let result = await fetch(
           "https://productmanagementserver-fzzc.onrender.com/login",
@@ -37,7 +36,6 @@ const Login = () => {
         } else {
           alert("Enter the Correct Password and Email");
         }
-      }
     } finally {
       setLoader(false);
     }

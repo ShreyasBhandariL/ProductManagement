@@ -18,8 +18,8 @@ const Signup = () => {
   const Content = async () => {
     try {
       if (!name && !email && !password && !role) {
-        alert("Please fill all the fields");
-      } else {
+        return alert("Please fill all the fields");
+      } 
         setLoader(true);
         let result = await fetch(
           "https://productmanagementserver-fzzc.onrender.com/register",
@@ -38,7 +38,6 @@ const Signup = () => {
         localStorage.setItem("user", JSON.stringify(result));
         console.warn(result);
         navigate("/");
-      }
     } finally {
       setLoader(false);
     }
