@@ -6,59 +6,74 @@ const Signup = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [role, setRole] = useState("");
+  const [loader, setLoader] = useState(false);
   const navigate = useNavigate();
   useEffect(() => {
     const auth = localStorage.getItem("user");
     if (auth) {
-      navigate("/Home");
+      navigate("/");
     }
   });
   const Content = async () => {
-    console.warn(name, email, password);
-    let result = await fetch(
-      "https://productmanagementserver-fzzc.onrender.com/register",
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name,
-          email,
-          password,
-        }),
-      }
-    );
-    result = await result.json();
-    localStorage.setItem("user", JSON.stringify(result));
-    console.warn(result);
-    navigate("/Home");
+    try {
+      setLoader(true);
+      let result = await fetch(
+        "https://productmanagementserver-fzzc.onrender.com/register",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name,
+            email,
+            password,
+            role,
+          }),
+        }
+      );
+      result = await result.json();
+      localStorage.setItem("user", JSON.stringify(result));
+      console.warn(result);
+      navigate("/");
+    } finally {
+      setLoader(false);
+    }
   };
   return (
     <div className="container">
-    <div className="signup">
-      <h1 style={{color:"black"}}>Register</h1>
-      <input
-        type="text"
-        placeholder="Enter Your Name"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-      ></input>
-      <input
-        type="email"
-        placeholder="Enter Your Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      ></input>
-      <input
-        type="password"
-        placeholder="Enter Your Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      ></input>
-      <button  onClick={Content} type="button">
-        Sign UP
-      </button>
+      <div className="signup">
+        <h1 style={{ color: "black" }}>Register</h1>
+        <input
+          type="text"
+          placeholder="Enter Your Name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        ></input>
+        <input
+          type="email"
+          placeholder="Enter Your Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        ></input>
+        <input
+          type="password"
+          placeholder="Enter Your Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        ></input>
+        <div className="d-flex role" value={role} onChange={(e) => setRole(e.target.value)}>
+          <label>
+            <input type="radio" name="role" value="1" /> Buyer
+          </label>
+          <label>
+            <input type="radio" name="role" value="2" /> Seller
+          </label>
+        </div>
+        <button onClick={Content} type="button" className="loader" disabled={loader}>
+          {loader ? "Signing in":"Sign UP"}
+        </button>
       </div>
-      </div>
+    </div>
   );
 };
 

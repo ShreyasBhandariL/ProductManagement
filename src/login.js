@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [role, setRole] = useState("");
+  const [loader, setLoader] = useState(false);
   const navigate = useNavigate();
   useEffect(() => {
     const auth = localStorage.getItem("user");
@@ -13,20 +15,25 @@ const Login = () => {
     }
   });
   const loggedIn = async () => {
-    let result = await fetch(
-      "https://productmanagementserver-fzzc.onrender.com/login",
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
+    try {
+      setLoader(true);
+      let result = await fetch(
+        "https://productmanagementserver-fzzc.onrender.com/login",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, password, role }),
+        }
+      );
+      result = await result.json();
+      if (result.name) {
+        localStorage.setItem("user", JSON.stringify(result));
+        navigate("/");
+      } else {
+        alert("Enter the Correct Password and Email");
       }
-    );
-    result = await result.json();
-    if (result.name) {
-      localStorage.setItem("user", JSON.stringify(result));
-      navigate("/Home");
-    } else {
-      alert("Enter the Correct Password and Email");
+    } finally {
+      setLoader(false);
     }
   };
   return (
@@ -45,8 +52,20 @@ const Login = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button onClick={loggedIn} type="button">
-          Login
+        <div
+          className="d-flex role"
+          value={role}
+          onChange={(e) => setRole(e.target.value)}
+        >
+          <label>
+            <input type="radio" name="role" value="1" /> Buyer
+          </label>
+          <label>
+            <input type="radio" name="role" value="2" /> Seller
+          </label>
+        </div>
+        <button onClick={loggedIn} type="button" className="loader" disabled={loader}>
+          {loader ? "Logging in..":"Login"}
         </button>
       </div>
     </div>

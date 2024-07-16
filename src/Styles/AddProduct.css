@@ -60,6 +60,13 @@ body {
   transition: background-color 0.3s;
 }
 
-.signup button:hover {
-  background-color: #218838;
-} 
+
+
+.loader:disabled{
+background-color: #ccc; 
+  cursor: not-allowed;
+}
+
+.loader:not(:disabled):hover {
+  background-color: #218838; /* Hover color */
+}

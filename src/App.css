@@ -8,6 +8,23 @@ html, body {
   padding: 0;
 }
 
+.d-flex.role {
+  display: flex;
+  justify-content:space-around;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.d-flex.role label {
+  display: flex;
+  align-items: center;
+  margin-right: 10px; 
+}
+
+.d-flex.role input[type="radio"] {
+  margin: 0;
+  width: auto; 
+}
 body {
   background-image: url("../image/newone.jpg");
   background-size: cover;

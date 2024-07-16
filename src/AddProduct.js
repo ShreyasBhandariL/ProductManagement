@@ -8,7 +8,9 @@ const AddProduct = () => {
   const [category, setCategory] = useState("");
   const [error, setError] = useState(false);
   const [image, setImage] = useState(null);
+  const [loader, setLoader] = useState(false);
   const navigate = useNavigate();
+
 
   const handleImageChange = (e) => {
     setImage(e.target.files[0]);
@@ -29,6 +31,7 @@ const AddProduct = () => {
     formData.append("image", image);
 
     try {
+      setLoader(true);
       let response = await fetch(
         "https://productmanagementserver-fzzc.onrender.com/add-product",
         {
@@ -37,14 +40,12 @@ const AddProduct = () => {
         }
       );
 
-      if (!response.ok) {
-        throw new Error("Failed to add product");
-      }
-
       await response.json();
       navigate("/products");
     } catch (error) {
       console.error("Error:", error.message);
+    } finally {
+      setLoader(false);
     }
   };
 
@@ -95,8 +96,8 @@ const AddProduct = () => {
           <span className="validation">Upload a valid Image</span>
         )}
 
-        <button onClick={Product} type="button">
-          Add Product
+        <button onClick={Product} className="loader" type="button" disabled={loader}>
+          {loader? "Adding..." : "Add Product"}
         </button>
       </div>
     </div>
