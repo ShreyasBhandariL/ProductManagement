@@ -23,19 +23,21 @@ const Nav = () => {
               <span className="nav-text">Products</span>
             </Link>
           </li>
+          {role === "2" ? (
+            <>
           <li>
             <Link to="/AddProduct">
               <i className="fas fa-plus-circle mobile-icon"></i>
               <span className="nav-text">Add Product</span>
             </Link>
           </li>
-          {role === "2" ? (
             <li>
               <Link to="/CustomerList">
                 <i className="fas fa-list mobile-icon"></i>
                 <span className="nav-text">Buyed Product List</span>
               </Link>
-            </li>
+              </li>
+              </>
           ) : (
             <></>
           )}

@@ -4,15 +4,20 @@ import "./Styles/BuyedProductList.css"; // new CSS file
 
 const BuyedProductList = () => {
   const [customers, setCustomers] = useState([]);
+  const dburl = process.env.REACT_APP_DATABASE_URL;
+  const auth = JSON.parse(localStorage.getItem("user"));
+  const authId = auth?._id;
 
   useEffect(() => {
     getCustomers();
   }, []);
 
   const getCustomers = async () => {
-    let result = await fetch(
-      "https://productmanagementserver-fzzc.onrender.com/customers"
-    );
+    let result = await fetch(`${dburl}/customers`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ authId }),
+    });
     result = await result.json();
     setCustomers(result);
   };

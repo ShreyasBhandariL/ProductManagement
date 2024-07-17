@@ -6,18 +6,19 @@ const AddProduct = () => {
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [category, setCategory] = useState("");
+  const [productQuantity, setProductQuantity] = useState("");
   const [error, setError] = useState(false);
   const [image, setImage] = useState(null);
   const [loader, setLoader] = useState(false);
   const navigate = useNavigate();
-
+  const dburl = process.env.REACT_APP_DATABASE_URL;
 
   const handleImageChange = (e) => {
     setImage(e.target.files[0]);
   };
 
   const Product = async () => {
-    if (!name || !price || !category) {
+    if (!name || !price || !category || !productQuantity) {
       setError(true);
       return false;
     }
@@ -27,13 +28,14 @@ const AddProduct = () => {
     formData.append("name", name);
     formData.append("price", price);
     formData.append("category", category);
+    formData.append("productQuantity", productQuantity);
     formData.append("userId", userId);
     formData.append("image", image);
 
     try {
       setLoader(true);
       let response = await fetch(
-        "https://productmanagementserver-fzzc.onrender.com/add-product",
+        `${dburl}/add-product`,
         {
           method: "POST",
           body: formData,
@@ -59,7 +61,9 @@ const AddProduct = () => {
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
-        {error && !name && <span className="validation">Enter a valid Name</span>}
+        {error && !name && (
+          <span className="validation">Enter a valid Name</span>
+        )}
 
         <input
           type="text"
@@ -71,11 +75,10 @@ const AddProduct = () => {
           <span className="validation">Enter a valid Price</span>
         )}
 
-        <select
-          value={category}
-          onChange={(e) => setCategory(e.target.value)}
-        >
-          <option value="" disabled>Select any option</option>
+        <select value={category} onChange={(e) => setCategory(e.target.value)}>
+          <option value="" disabled>
+            Select any option
+          </option>
           <option value="Textile">Textile Crafts</option>
           <option value="Paper">Paper Crafts</option>
           <option value="Wood">Wood Crafts</option>
@@ -91,13 +94,28 @@ const AddProduct = () => {
           <span className="validation">Enter a valid Category</span>
         )}
 
+        <input
+          type="number"
+          placeholder="Enter the Product Quantity"
+          value={productQuantity}
+          onChange={(e) => setProductQuantity(parseInt(e.target.value))}
+        />
+        {error && !productQuantity && (
+          <span className="validation">Enter a valid Quantity</span>
+        )}
+
         <input type="file" onChange={handleImageChange} />
         {error && !image && (
           <span className="validation">Upload a valid Image</span>
         )}
 
-        <button onClick={Product} className="loader" type="button" disabled={loader}>
-          {loader? "Adding..." : "Add Product"}
+        <button
+          onClick={Product}
+          className="loader"
+          type="button"
+          disabled={loader}
+        >
+          {loader ? "Adding..." : "Add Product"}
         </button>
       </div>
     </div>

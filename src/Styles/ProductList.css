@@ -233,3 +233,13 @@ h1 {
     width: 330px;
   }
 }
+
+
+.loader:disabled{
+background-color: #ccc; 
+  cursor: not-allowed;
+}
+
+.loader:not(:disabled):hover {
+  background-color: #218838; /* Hover color */
+}

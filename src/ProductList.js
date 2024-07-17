@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-duplicate-props */
 /* eslint-disable no-template-curly-in-string */
 import React, { useEffect, useState } from "react";
 import { Link,useNavigate } from "react-router-dom";
@@ -10,8 +11,14 @@ const ProductList = () => {
    const [buyerName, setBuyerName] = useState("");
    const [buyerContact, setBuyerContact] = useState("");
   const [showPopup, setShowPopup] = useState(false);
+  const [loader, setLoader] = useState(false);
   const navigate = useNavigate();
+  const dburl = process.env.REACT_APP_DATABASE_URL;
 
+  // let auth = localStorage.getItem("user");
+  const authRole = JSON.parse(localStorage.getItem("user"));
+  const role = authRole?.role;
+  const id = authRole?._id;
 
   useEffect(() => {
     getProducts();
@@ -19,7 +26,7 @@ const ProductList = () => {
 
   const getProducts = async () => {
     let result = await fetch(
-      "https://productmanagementserver-fzzc.onrender.com/products"
+      `${dburl}/products`
     );
     result = await result.json();
     setProducts(result);
@@ -27,7 +34,7 @@ const ProductList = () => {
 
   const deleteProduct = async (id) => {
     let result = await fetch(
-      `https://productmanagementserver-fzzc.onrender.com/products/${id}`,
+      `${dburl}/products/${id}`,
       {
         method: "DELETE",
       }
@@ -64,8 +71,9 @@ const ProductList = () => {
       };
 
       try {
+        setLoader(true);
         const response = await fetch(
-          "https://productmanagementserver-fzzc.onrender.com/add-buyer",
+          `${dburl}/add-buyer`,
           {
             method: "POST",
             headers: {
@@ -81,6 +89,8 @@ const ProductList = () => {
         }
       } catch (error) {
         console.error("Error adding buyer:", error);
+      } finally {
+        setLoader(false);
       }
 
       closePopup();
@@ -100,6 +110,7 @@ const ProductList = () => {
               <th>Name</th>
               <th>Image</th>
               <th>Price</th>
+              <th>Quantity</th>
               <th>Category</th>
               <th>Operations</th>
             </tr>
@@ -113,25 +124,35 @@ const ProductList = () => {
                   <td>
                     {item.image && (
                       <img
-                        src={`https://productmanagementserver-fzzc.onrender.com/${item.image}`}
+                        src={`${dburl}/${item.image}`}
                         alt={item.name}
                         className="product-image"
                       />
                     )}
                   </td>
                   <td>{item.price}</td>
+                  <td>{item.productQuantity}</td>
                   <td>{item.category}</td>
                   <td className="product-buttons">
                     <button onClick={() => openPopup(item)}>Buy</button>
-                    <button>
-                      <Link to={`/update/${item._id}`} className="update-link">
-                        Update
-                      </Link>
-                    </button>
+                    {role === "2" && id === item.userId ? (
+                      <>
+                        <button>
+                          <Link
+                            to={`/update/${item._id}`}
+                            className="update-link"
+                          >
+                            Update
+                          </Link>
+                        </button>
 
-                    <button onClick={() => deleteProduct(item._id)}>
-                      Delete
-                    </button>
+                        <button onClick={() => deleteProduct(item._id)}>
+                          Delete
+                        </button>
+                      </>
+                    ) : (
+                      <></>
+                    )}
                   </td>
                 </tr>
               ))}
@@ -146,7 +167,7 @@ const ProductList = () => {
             <div key={item._id} className="product-card">
               {item.image && (
                 <img
-                  src={`https://productmanagementserver-fzzc.onrender.com/${item.image}`}
+                  src={`${dburl}/${item.image}`}
                   alt={item.name}
                   className="product-image"
                 />
@@ -156,12 +177,21 @@ const ProductList = () => {
               <p>Category: {item.category}</p>
               <div className="product-buttons">
                 <button onClick={() => openPopup(item)}>Buy</button>
-                <button>
-                  <Link to={`/update/${item._id}`} className="update-link">
-                    Update
-                  </Link>
-                </button>
-                <button onClick={() => deleteProduct(item._id)}>Delete</button>
+                {role === "2" && id === item.userId ? (
+                  <>
+                    <button>
+                      <Link to={`/update/${item._id}`} className="update-link">
+                        Update
+                      </Link>
+                    </button>
+
+                    <button onClick={() => deleteProduct(item._id)}>
+                      Delete
+                    </button>
+                  </>
+                ) : (
+                  <></>
+                )}
               </div>
             </div>
           ))}
@@ -176,11 +206,9 @@ const ProductList = () => {
               </button>
               <h2>{selectedProduct.name}</h2>
               {selectedProduct.image && (
-                <a
-                  href={`https://productmanagementserver-fzzc.onrender.com/${selectedProduct.image}`}
-                >
+                <a href={`${dburl}/${selectedProduct.image}`}>
                   <img
-                    src={`https://productmanagementserver-fzzc.onrender.com/${selectedProduct.image}`}
+                    src={`${dburl}/${selectedProduct.image}`}
                     alt={selectedProduct.name}
                     className="product-image"
                   />
@@ -214,7 +242,8 @@ const ProductList = () => {
                   onChange={(e) => setQuantity(parseInt(e.target.value))}
                 />
               </div>
-              <button className="buy-btn" onClick={handleBuy}>
+              <button
+                className="buy-btn loader" onClick={handleBuy}  disabled={loader}>
                 Buy Now
               </button>
             </div>

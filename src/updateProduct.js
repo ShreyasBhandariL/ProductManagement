@@ -6,8 +6,11 @@ const UpdateProduct = () => {
   const [name, setName] = React.useState("");
   const [price, setPrice] = React.useState("");
   const [category, setCategory] = React.useState("");
+  const [productQuantity, setProductQuantity] = React.useState("");
   const params = useParams();
   const navigate = useNavigate();
+  const dburl = process.env.REACT_APP_DATABASE_URL;
+
   useEffect(() => {
     getUpdateProduct();
   }, [params.id]);
@@ -15,7 +18,7 @@ const UpdateProduct = () => {
   const getUpdateProduct = async () => {
     try {
       let result = await fetch(
-        `https://productmanagementserver-fzzc.onrender.com/products/${params.id}`
+        `${dburl}/products/${params.id}`
       );
       result = await result.json();
       setName(result.name);
@@ -28,7 +31,7 @@ const UpdateProduct = () => {
 
   const updateProduct = async (id) => {
     let result = await fetch(
-      `https://productmanagementserver-fzzc.onrender.com/products/${id}`,
+      `${dburl}/products/${id}`,
       {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
@@ -85,7 +88,14 @@ const UpdateProduct = () => {
         <option value="Fiber">Fiber Arts</option>
         <option value="Others">Other Crafts</option>
       </select>
-      
+
+      <input
+        type="number"
+        placeholder="Enter the Product Quantity"
+        value={productQuantity}
+        onChange={(e) => setProductQuantity(parseInt(e.target.value))}
+      />
+
       <button type="button" onClick={() => updateProduct(params.id)}>
         UpdateProduct
       </button>

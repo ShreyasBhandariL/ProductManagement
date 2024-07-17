@@ -8,6 +8,8 @@ const Login = () => {
   const [role, setRole] = useState("");
   const [loader, setLoader] = useState(false);
   const navigate = useNavigate();
+  const dburl = process.env.REACT_APP_DATABASE_URL;
+
   useEffect(() => {
     const auth = localStorage.getItem("user");
     if (auth) {
@@ -22,7 +24,7 @@ const Login = () => {
       }
         setLoader(true);
         let result = await fetch(
-          "https://productmanagementserver-fzzc.onrender.com/login",
+          `${dburl}/login`,
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
