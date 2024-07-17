@@ -13,13 +13,19 @@ const BuyedProductList = () => {
   });
 
   const getCustomers = async () => {
-    let result = await fetch(`${dburl}/customers`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ authId }),
-    });
-    result = await result.json();
-    setCustomers(result);
+    try {
+      const response = await fetch(`${dburl}/customers`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ authId }),
+      });
+      let result = await response.json();
+      if (response.status === 200) {
+        setCustomers(result);
+      }
+    } catch(error) {
+      console.error(error);
+    }
   };
 
   return (
