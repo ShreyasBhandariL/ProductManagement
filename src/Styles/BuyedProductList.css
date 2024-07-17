@@ -1,6 +1,7 @@
 .buyedProductList {
   margin: 20px;
   font-family: Arial, sans-serif;
+  padding-bottom: 60px;
 }
 
 .buyedProductList h1 {
