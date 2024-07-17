@@ -22,7 +22,7 @@ const ProductList = () => {
 
   useEffect(() => {
     getProducts();
-  }, []);
+  });
 
   const getProducts = async () => {
     let result = await fetch(

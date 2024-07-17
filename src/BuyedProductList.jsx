@@ -10,7 +10,7 @@ const BuyedProductList = () => {
 
   useEffect(() => {
     getCustomers();
-  }, []);
+  });
 
   const getCustomers = async () => {
     let result = await fetch(`${dburl}/customers`, {
