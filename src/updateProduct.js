@@ -24,6 +24,7 @@ const UpdateProduct = () => {
       setName(result.name);
       setPrice(result.price);
       setCategory(result.category);
+      setProductQuantity(result.productQuantity);
     } catch {
       console.log("Error:");
     }

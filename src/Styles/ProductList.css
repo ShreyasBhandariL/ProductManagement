@@ -101,7 +101,7 @@ h1 {
 .product-card button {
   margin-top: 10px;
   padding: 10px;
-  background-color: #007bff;
+  background-color: #008085;
   color: white;
   border: none;
   border-radius: 5px;
@@ -109,15 +109,24 @@ h1 {
   text-decoration: none;
 }
 
-.product-card button:hover {
-  background-color: #0056b3;
-}
 
 
-.product-buttons button {
+
+.product-table-buttons button,
+.product-card-buttons button  {
   margin-right: 8px;
   padding: 4px 8px; 
   font-size: 14px; 
+  align-items: center;
+  max-width: 100px;
+}
+
+.product-table-buttons {
+  display: flex !important;
+  gap: 10px !important;
+  justify-content: center !important;
+  align-items: center !important;
+  flex-wrap: nowrap !important;
 }
 
 .product-buttons button:last-child {
@@ -126,15 +135,47 @@ h1 {
 
 /* Responsive styles */
 @media (max-width: 767px) {
-  .table-container {
-    display: none;
-  }
+.table-container {
+  display: none;
+}
 
-  .card-container {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-  }
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
 
+.product-card-buttons {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px; 
+}
+
+.product-card-buttons.single-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  grid-column: span 2;
+}
+
+.product-card-buttons button {
+  width: 100%;
+}
+
+.product-card-buttons button:nth-child(1) {
+  grid-column: span 1; 
+}
+
+.product-card-buttons button:nth-child(2) {
+  grid-column: span 1; 
+}
+
+.product-card-buttons button:nth-child(3) {
+  grid-column: span 2; 
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+}
 }
 
 @media (min-width: 768px){
@@ -162,8 +203,8 @@ h1 {
 
 .popup-content {
   background-color: #fff;
-  padding: 10px 50px 10px 30px;
-  width: 30%;
+  padding: 10px 30px 10px 30px;
+  width: 28%;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   position: relative;
@@ -178,6 +219,11 @@ h1 {
   cursor: pointer;
   font-size: 24px;
   color: #777;
+  width: 40px;
+}
+
+.close-btn :hover{
+  background-color: initial;
 }
 
 .popup-content h2 {
@@ -232,6 +278,9 @@ h1 {
 {
   .popup-content{
     width: 330px;
+  }
+  .popup-content .form-group input {
+    color: black;
   }
 }
 

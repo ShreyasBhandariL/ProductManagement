@@ -40,8 +40,8 @@ const BuyedProductList = () => {
               <th>Customer Contact</th>
               <th>Product Name</th>
               <th>Product Price</th>
-              <th>Product Category</th>
               <th>Quantity</th>
+              <th>Total Price</th>
             </tr>
           </thead>
           <tbody>
@@ -53,8 +53,8 @@ const BuyedProductList = () => {
                   <td>{item.buyerContact}</td>
                   <td>{item.productName}</td>
                   <td>{item.productPrice}</td>
-                  <td>{item.productCategory}</td>
                   <td>{item.quantity}</td>
+                  <td>{item.quantity * item.productPrice}</td>
                 </tr>
               ))}
           </tbody>
@@ -70,8 +70,8 @@ const BuyedProductList = () => {
               <p>Customer Contact: {item.buyerContact}</p>
               <p>Product Name: {item.productName}</p>
               <p>Product Price: {item.productPrice}</p>
-              <p>Product Category: {item.productCategory}</p>
               <p>Quantity: {item.quantity}</p>
+              <p>Total Price: {item.quantity * item.productPrice}</p>
             </div>
           ))}
       </div>

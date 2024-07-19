@@ -10,6 +10,7 @@ import ProductList from "./ProductList";
 import UpdateProduct from "./updateProduct";
 import BuyedProductList from "./BuyedProductList";
 import MainPage from "./mainPage";
+import ContactUs from "./contactUs";
 function App() {
   return (
     <div className="1">
@@ -23,8 +24,7 @@ function App() {
               <Route path="/AddProduct" element={<AddProduct />}></Route>
               <Route path="/update/:id" element={<UpdateProduct />}></Route>
               <Route path="/CustomerList" element={<BuyedProductList />}></Route>
-              <Route path="/ContactUs" element={<h1>Contact Us</h1>}></Route>
-              <Route path="/Stories" element={<h1>Stories</h1>}></Route>
+              <Route path="/ContactUs" element={<ContactUs />}></Route>
             </Route>
             <Route path="/signup" element={<Signup />}></Route>
             <Route path="/login" element={<Login />}></Route>

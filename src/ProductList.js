@@ -1,15 +1,15 @@
 /* eslint-disable react/jsx-no-duplicate-props */
 /* eslint-disable no-template-curly-in-string */
 import React, { useEffect, useState } from "react";
-import { Link,useNavigate } from "react-router-dom";
-import "./Styles/ProductList.css"; 
+import { Link, useNavigate } from "react-router-dom";
+import "./Styles/ProductList.css";
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
-   const [selectedProduct, setSelectedProduct] = useState(null);
-   const [quantity, setQuantity] = useState(1);
-   const [buyerName, setBuyerName] = useState("");
-   const [buyerContact, setBuyerContact] = useState("");
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [quantity, setQuantity] = useState(1);
+  const [buyerName, setBuyerName] = useState("");
+  const [buyerContact, setBuyerContact] = useState("");
   const [showPopup, setShowPopup] = useState(false);
   const [loader, setLoader] = useState(false);
   const navigate = useNavigate();
@@ -25,20 +25,15 @@ const ProductList = () => {
   });
 
   const getProducts = async () => {
-    let result = await fetch(
-      `${dburl}/products`
-    );
+    let result = await fetch(`${dburl}/products`);
     result = await result.json();
     setProducts(result);
   };
 
   const deleteProduct = async (id) => {
-    let result = await fetch(
-      `${dburl}/products/${id}`,
-      {
-        method: "DELETE",
-      }
-    );
+    let result = await fetch(`${dburl}/products/${id}`, {
+      method: "DELETE",
+    });
     result = await result.json();
     if (result) {
       getProducts();
@@ -52,9 +47,9 @@ const ProductList = () => {
   const closePopup = () => {
     setSelectedProduct(null);
     setShowPopup(false);
-    setQuantity(1); 
-    setBuyerName(""); 
-    setBuyerContact(""); 
+    setQuantity(1);
+    setBuyerName("");
+    setBuyerContact("");
   };
 
   const handleBuy = async () => {
@@ -72,19 +67,15 @@ const ProductList = () => {
 
       try {
         setLoader(true);
-        const response = await fetch(
-          `${dburl}/add-buyer`,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(buyerInfo),
-          }
-        );
-       await response.json();
-        if (response.status === 200)
-        {
+        const response = await fetch(`${dburl}/add-buyer`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(buyerInfo),
+        });
+        await response.json();
+        if (response.status === 200) {
           navigate("/products");
         }
       } catch (error) {
@@ -124,7 +115,7 @@ const ProductList = () => {
                   <td>
                     {item.image && (
                       <img
-                        src={`${dburl}/${item.image}`}
+                        src={`${item.image}`}
                         alt={item.name}
                         className="product-image"
                       />
@@ -133,7 +124,7 @@ const ProductList = () => {
                   <td>{item.price}</td>
                   <td>{item.productQuantity}</td>
                   <td>{item.category}</td>
-                  <td className="product-buttons">
+                  <td className="product-table-buttons">
                     <button onClick={() => openPopup(item)}>Buy</button>
                     {role === "2" && id === item.userId ? (
                       <>
@@ -163,38 +154,41 @@ const ProductList = () => {
       {/* Card view for mobile */}
       <div className="card-container">
         {products.length > 0 &&
-          products?.map((item, index) => (
-            <div key={item._id} className="product-card">
-              {item.image && (
-                <img
-                  src={`${dburl}/${item.image}`}
-                  alt={item.name}
-                  className="product-image"
-                />
-              )}
-              <h2>{item.name}</h2>
-              <p>Price: ${item.price}</p>
-              <p>Category: {item.category}</p>
-              <div className="product-buttons">
-                <button onClick={() => openPopup(item)}>Buy</button>
-                {role === "2" && id === item.userId ? (
-                  <>
-                    <button>
-                      <Link to={`/update/${item._id}`} className="update-link">
-                        Update
-                      </Link>
-                    </button>
-
-                    <button onClick={() => deleteProduct(item._id)}>
-                      Delete
-                    </button>
-                  </>
-                ) : (
-                  <></>
+          products?.map((item, index) => {
+            const buttonClass = role === "2" && id === item.userId ? "" : "single-button";
+            return (
+              <div key={item._id} className="product-card">
+                {item.image && (
+                  <img
+                    src={`${item.image}`}
+                    alt={item.name}
+                    className="product-image"
+                  />
                 )}
+                <h2>{item.name}</h2>
+                <p>Price: ₹{item.price}</p>
+                <p>Category: {item.category}</p>
+                <div className={`product-card-buttons ${buttonClass}`}>
+                  <button onClick={() => openPopup(item)}>Buy</button>
+                  {role === "2" && id === item.userId ? (
+                    <>
+                      <button>
+                        <Link to={`/update/${item._id}`} className="update-link">
+                          Update
+                        </Link>
+                      </button>
+
+                      <button onClick={() => deleteProduct(item._id)}>
+                        Delete
+                      </button>
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                </div>
               </div>
-            </div>
-          ))}
+            )
+          })}
       </div>
 
       {showPopup && selectedProduct && (
@@ -206,15 +200,15 @@ const ProductList = () => {
               </button>
               <h2>{selectedProduct.name}</h2>
               {selectedProduct.image && (
-                <a href={`${dburl}/${selectedProduct.image}`}>
+                <a href={`${selectedProduct.image}`}>
                   <img
-                    src={`${dburl}/${selectedProduct.image}`}
+                    src={`${selectedProduct.image}`}
                     alt={selectedProduct.name}
                     className="product-image"
                   />
                 </a>
               )}
-              <p>Price: ${selectedProduct.price}</p>
+              <p>Price: ₹{selectedProduct.price}</p>
               <div className="form-group">
                 <label htmlFor="buyerName">Buyer Name:</label>
                 <input
@@ -243,7 +237,10 @@ const ProductList = () => {
                 />
               </div>
               <button
-                className="buy-btn loader" onClick={handleBuy}  disabled={loader}>
+                className="buy-btn loader"
+                onClick={handleBuy}
+                disabled={loader}
+              >
                 Buy Now
               </button>
             </div>

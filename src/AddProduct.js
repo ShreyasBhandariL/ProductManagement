@@ -54,7 +54,7 @@ const AddProduct = () => {
   return (
     <div className="container">
       <div className="signup">
-        <h2>Add New Product</h2>
+        <h1>Add New Product</h1>
         <input
           type="text"
           placeholder="Enter the Product Name"

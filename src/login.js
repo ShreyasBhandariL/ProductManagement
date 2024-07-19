@@ -16,6 +16,9 @@ const Login = () => {
       navigate("/");
     }
   });
+
+  console.log(dburl);
+
   const loggedIn = async () => {
     try {
       if (!email && !password && !role)
@@ -45,7 +48,7 @@ const Login = () => {
   return (
     <div className="container">
       <div className="signup">
-        <h1 style={{ color: "black" }}>Login</h1>
+        <h1>Login</h1>
         <input
           type="email"
           placeholder="Enter email"

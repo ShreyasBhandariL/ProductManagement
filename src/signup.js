@@ -47,7 +47,7 @@ const Signup = () => {
   return (
     <div className="container">
       <div className="signup">
-        <h1 style={{ color: "black" }}>Register</h1>
+        <h1>Register</h1>
         <input
           type="text"
           placeholder="Enter Your Name"

@@ -49,12 +49,6 @@ const Nav = () => {
             </Link>
           </li>
           <li>
-            <Link to="/Stories">
-              <i className="fas fa-book mobile-icon"></i>
-              <span className="nav-text">Stories</span>
-            </Link>
-          </li>
-          <li>
             <Link onClick={logout} to="/signup">
               <i className="fas fa-sign-out-alt mobile-icon"></i>
               <span className="nav-text">Logout ({JSON.parse(auth).name})</span>
